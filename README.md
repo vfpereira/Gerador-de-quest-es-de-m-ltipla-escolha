@@ -9,6 +9,7 @@ Necessario ter instalado o docker e o docker-compose
 	docker-compose up -d --no-deps --build db
 
 -Rodando o ambiente em backgroud	
+	
 	docker-compose up -d
 
-	
+
