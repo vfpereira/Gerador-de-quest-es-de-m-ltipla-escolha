@@ -1,0 +1,28 @@
+# ./docker-compose.yml
+
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  web:
+    build:
+      context: .
+      dockerfile: ./php_pg.Dockerfile
+    image: php:7.2.2-apache 
+    container_name: php_web
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
