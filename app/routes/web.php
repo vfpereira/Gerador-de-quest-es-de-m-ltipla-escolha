@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['uses' => 'LoginController@index']);
+Route::post('formSubmit','LoginController@formSubmit');
+Route::post('formSubmitRegister','LoginController@formSubmitRegister');

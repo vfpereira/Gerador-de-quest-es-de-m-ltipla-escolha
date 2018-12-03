@@ -8,7 +8,7 @@ Necessario ter instalado o docker e o docker-compose
 	docker-compose up -d --no-deps --build web              //em caso de erro usar sudo
 	docker-compose up -d --no-deps --build db
 
--Rodando o ambiente em backgroud	
+-Rodando o ambiente em background	
 	
 	docker-compose up -d
 
