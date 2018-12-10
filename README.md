@@ -1,7 +1,7 @@
 # Gerador-de-questoes-de-multipla-escolha
 Um projeto para cadastrar tópicos,subtópicos e questões de múltipla escolha para os mesmos.
 
-Necessario ter instalado o docker e o docker-compose
+Necessario ter instalado o docker e o docker-compose e o composer em caso de necessitar baixar as dependencias
 
 -Criacao do ambiente docker:
 	
@@ -29,3 +29,4 @@ Em caso de erro de permissão, dar permissao a pasta inicial do projeto de leitu
 	chmod -R o+rw /var/www/html
 
 
+Se der algum erro ainda baixar as dependencias do php pelo composer.
