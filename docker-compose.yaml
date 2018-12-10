@@ -10,13 +10,20 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
+      - "DB_CONNECTION: pgsql"
+      - "DB_HOST: postgresql"
+      - "DB_PORT: 5432"
+      - "DB_DATABASE: gerador"
+      - "DB_USERNAME: postgres"
+      - "POSTGRES_PASSWORD: example"
+    ports:
+      - 5432:5432
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 9000:8080
 
   web:
     build:
@@ -27,8 +34,26 @@ services:
     depends_on:
       - db
     ports:
-      - "80:80"
+      - "8000:80"
     volumes:
       - ./app:/var/www/html
     working_dir: /var/www/html
+        
+
+  migration:
+    build: 
+      context: .
+      dockerfile: ./php_pg.Dockerfile
+    image: php:7.2.2-apache
+    command: php artisan migrate
+    volumes:
+      - ./app:/var/www/html
+    links:
+      - db
+    depends_on:
+      - web
+
     
+
+    
+            

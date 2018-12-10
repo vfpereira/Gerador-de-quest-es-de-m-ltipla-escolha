@@ -20,7 +20,12 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('navbar', require('./components/Navbar.vue'));
 Vue.component('login', require('./components/Login.vue'));
-
+Vue.component('menutop', require('./components/MenuTop.vue'));
+Vue.component('tables', require('./components/Tables.vue'));
+Vue.component('form-criar', require('./components/FormCriar.vue'));
+Vue.component('form-criar-question', require('./components/FormCriarQuestions.vue'));
+Vue.component('table-question', require('./components/TableQuestion.vue'));
+Vue.component('final-question', require('./components/FormFinalQuestion.vue'));
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 

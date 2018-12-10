@@ -12,4 +12,20 @@ Necessario ter instalado o docker e o docker-compose
 	
 	docker-compose up -d
 
+Em caso de erro de endereço em uso, trocar a porta no arquivo docker-compose.yaml
+
+Portas sendo usada : 
+9000 para visualizar o banco de dados com adminer.
+
+8000 para a aplicação
+
+Endereço utilizado localhost.
+
+Acessar com localhost:8000 a aplicação.
+
+Em caso de erro de permissão, dar permissao a pasta inicial do projeto de leitura para todos.
+-No linux
+	
+	chmod -R o+rw /var/www/html
+
 

@@ -5,9 +5,10 @@
 		<h3 class="card-header">Login</h3>
 		
 		<div class="card-body">
-			<div  class="alert alert-danger" v-if="validationErrors">
+			<!--mudar cor quando login com sucesso-->
+			<div  class="alert alert-danger" v-show="validationErrors">
                 <ul>
-                    <li v-for="(value, key, index) in validationErrors">{{ value }}</li>
+                    <li>{{ message }}</li>
                 </ul>
             </div>
 			
@@ -20,7 +21,7 @@
 				</div>
 
 				<div class="form-group">
-					<input type="password" ref="refPassword" name="name" v-model="password" required placeholder="Senha" class="form-control" v-bind:class="[passwordlSuccessClass]" v-on:keyup="checkPasswordValidation" required>
+					<input type="password" ref="refPassword" name="password" v-model="password" required placeholder="Senha" class="form-control" v-bind:class="[passwordlSuccessClass]" v-on:keyup="checkPasswordValidation" required>
 					
 				</div>
 
@@ -53,7 +54,8 @@ export default {
         	emailSuccessClass : "",
         	passwordlSuccessClass: "",
         	submitBtnDisabled: true,
-        	submitBtnRegisterDisabled: true
+        	submitBtnRegisterDisabled: true,
+        	message: ""
 		}
 	},
 	methods: {
@@ -90,13 +92,19 @@ export default {
 
 			this.errors = [];
 			this.validationErrors = false;
+			this.message = "";
 
 			axios.post('/formSubmit', {
 				csrf: this.csrf,
-				name: this.password,
+				password: this.password,
 				email: this.email,
 			}).then(response => {
-				console.log('successful');
+				if (response.data.login === false) {
+					this.validationErrors = true;
+					this.message = "Usuário ou senha inválidos."
+				} else {
+					window.location.replace(response.data.url); 
+				}
 			}).catch(error => {
 				if (error.response.status == 422){
 					this.validationErrors = error.response.data.errors;
@@ -110,10 +118,17 @@ export default {
 
 			axios.post('/formSubmitRegister', {
 				csrf: this.csrf,
-				name: this.password,
+				password: this.password,
 				email: this.email,
 			}).then(response => {
-				console.log('successful');
+				if (response.data.register === true){
+					this.validationErrors = true;
+					this.message = "Usuário criado com sucesso. Efetue o login.";
+
+				} else {
+					this.validationErrors = true;
+					this.message = "Usuário já existe.";
+				}
 			}).catch(error => {
 				if (error.response.status == 422){
 					this.validationErrors = error.response.data.errors;
